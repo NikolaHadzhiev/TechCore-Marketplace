@@ -1,20 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TechCore.DataAccess.Data;
+using TechCore.DataAccess.Repository;
 using TechCore.DataAccess.Repository.CategoryRepo;
 using TechCore.Models;
 
-namespace TechCoreWeb.Controllers
+namespace TechCoreWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
-        private readonly ICategoryRepository _categoryRepository;
-        public CategoryController(ICategoryRepository categoryRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _categoryRepository = categoryRepository;
+            _unitOfWork = unitOfWork;
         }
+
         public IActionResult Index()
         {
-            List<Category> objCategoryList = _categoryRepository.GetAll().ToList();
+            List<Category> objCategoryList = _unitOfWork.CategoryRepository.GetAll().ToList();
 
             return View(objCategoryList);
         }
@@ -29,8 +32,8 @@ namespace TechCoreWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _categoryRepository.Add(obj);
-                _categoryRepository.Save();
+                _unitOfWork.CategoryRepository.Add(obj);
+                _unitOfWork.Save();
 
                 TempData["success"] = "Category created successfully";
 
@@ -47,7 +50,7 @@ namespace TechCoreWeb.Controllers
                 return NotFound();
             }
 
-            Category? categoryFromDb = _categoryRepository.Get(u => u.Id == id);
+            Category? categoryFromDb = _unitOfWork.CategoryRepository.Get(u => u.Id == id);
 
             if (categoryFromDb == null)
             {
@@ -62,8 +65,8 @@ namespace TechCoreWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _categoryRepository.Update(obj);
-                _categoryRepository.Save();
+                _unitOfWork.CategoryRepository.Update(obj);
+                _unitOfWork.Save();
 
                 TempData["success"] = "Category updated successfully";
 
@@ -80,7 +83,7 @@ namespace TechCoreWeb.Controllers
                 return NotFound();
             }
 
-            Category? categoryFromDb = _categoryRepository.Get(u => u.Id == id);
+            Category? categoryFromDb = _unitOfWork.CategoryRepository.Get(u => u.Id == id);
 
             if (categoryFromDb == null)
             {
@@ -93,15 +96,15 @@ namespace TechCoreWeb.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-            Category? obj = _categoryRepository.Get(u => u.Id == id);
+            Category? obj = _unitOfWork.CategoryRepository.Get(u => u.Id == id);
 
             if (obj == null)
             {
                 return NotFound();
             }
 
-            _categoryRepository.Remove(obj);
-            _categoryRepository.Save();
+            _unitOfWork.CategoryRepository.Remove(obj);
+            _unitOfWork.Save();
 
             TempData["success"] = "Category deleted successfully";
 
