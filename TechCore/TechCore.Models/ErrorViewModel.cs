@@ -1,4 +1,4 @@
-namespace TechCoreWeb.Models
+namespace TechCore.Models
 {
     public class ErrorViewModel
     {

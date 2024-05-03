@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace TechCoreWeb.Models
+namespace TechCore.Models
 {
     public class Category
     {

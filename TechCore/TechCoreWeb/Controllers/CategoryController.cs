@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TechCoreWeb.Data;
-using TechCoreWeb.Models;
+using TechCore.DataAccess.Data;
+using TechCore.Models;
 
 namespace TechCoreWeb.Controllers
 {

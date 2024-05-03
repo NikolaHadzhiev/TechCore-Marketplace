@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace TechCoreWeb.Migrations
+namespace TechCore.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddCategoryTableToDb : Migration

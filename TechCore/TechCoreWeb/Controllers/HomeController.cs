@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using TechCoreWeb.Models;
+using TechCore.Models;
+
 
 namespace TechCoreWeb.Controllers
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TechCoreWeb.Models;
+using TechCore.Models;
 
-namespace TechCoreWeb.Data
+namespace TechCore.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {
